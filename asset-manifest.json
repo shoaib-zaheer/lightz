@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/lightz/static/css/main.5f361e03.chunk.css",
-    "main.js": "/lightz/static/js/main.5f4cdd91.chunk.js",
-    "main.js.map": "/lightz/static/js/main.5f4cdd91.chunk.js.map",
+    "main.js": "/lightz/static/js/main.232c92a0.chunk.js",
+    "main.js.map": "/lightz/static/js/main.232c92a0.chunk.js.map",
     "runtime-main.js": "/lightz/static/js/runtime-main.ee922a4a.js",
     "runtime-main.js.map": "/lightz/static/js/runtime-main.ee922a4a.js.map",
     "static/js/2.81e75736.chunk.js": "/lightz/static/js/2.81e75736.chunk.js",
     "static/js/2.81e75736.chunk.js.map": "/lightz/static/js/2.81e75736.chunk.js.map",
     "index.html": "/lightz/index.html",
-    "precache-manifest.210677fa5028d1fa96c3875733af1b71.js": "/lightz/precache-manifest.210677fa5028d1fa96c3875733af1b71.js",
+    "precache-manifest.743a060e7001c6def9c4a362eaebd725.js": "/lightz/precache-manifest.743a060e7001c6def9c4a362eaebd725.js",
     "service-worker.js": "/lightz/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/lightz/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.81e75736.chunk.js.LICENSE.txt": "/lightz/static/js/2.81e75736.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.ee922a4a.js",
     "static/js/2.81e75736.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.5f4cdd91.chunk.js"
+    "static/js/main.232c92a0.chunk.js"
   ]
 }
