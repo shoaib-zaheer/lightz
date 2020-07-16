@@ -57,7 +57,7 @@ function Register () {
           value === password.current || "The passwords do not match"
       })}
     />
-    <Button variant="secondary" size="md"  active type="submit" onClick={() => reset('data')}>Cansel</Button>
+    <Button variant="secondary" size="md"  active type="submit" onClick={() => reset('data')}>Cancel</Button>
     <Button className="button" variant="primary" size="md" active type="submit" onClick={handleSubmit(onSubmit)} >Register</Button>
   </Form>
 </div>
