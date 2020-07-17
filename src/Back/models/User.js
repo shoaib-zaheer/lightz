@@ -10,10 +10,10 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-  },
-  passwordCheck: {
-    type: String,
   }
+  // passwordCheck: {
+  //   type: String,
+  // }
 }, {timestamps: true})
 
 const User = mongoose.model('User', userSchema)
