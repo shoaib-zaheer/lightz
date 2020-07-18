@@ -18,6 +18,8 @@ function Register () {
     console.log(data);
   }
 
+ 
+
   return (
   <div className="Register row justify-content-center">
     <Form onSubmit={e => e.preventDefault()}>
