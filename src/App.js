@@ -7,7 +7,5 @@ function App() {
    <div className="App">
     <RouterNavbar/>
   </div>
-  );
-}
-
+  // A TODO
 export default App;

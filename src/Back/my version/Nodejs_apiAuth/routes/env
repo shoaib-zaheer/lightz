@@ -1,0 +1,2 @@
+DB_CONNECT = mongodb+srv://lanx01:lanx@lanxcluster.sdq4f.mongodb.net/authTest?retryWrites=true&w=majority
+TOKEN_SECRET = lanx-ngndnljdhsl
