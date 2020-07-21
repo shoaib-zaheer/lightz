@@ -145,10 +145,44 @@ const login1 = async (req, res) => {
 
 }
 
+const tokenIsValid = async (req, res) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token) {
+      return res.json(false);
+    }
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) {
+      return res.json(false);
+    } 
+
+    const user = await User.findById(verified.id);
+    if (!user) {
+      return res.json(false);
+    } else {
+      return res.json(true);
+    }
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+const getUser = async (req, res) => {
+  const user = await User.findById(req.user);
+  res.json({
+    userName: user.userName,
+    id: user._id,
+  });
+}
+
 module.exports = {
   // register,
   login1,
-  register1
+  register1,
+  tokenIsValid,
+  getUser
 };
 
 
