@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from "react";
+import UserContext from "../../context/UserContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Jumbotron, Container} from 'react-bootstrap'
 
+export default function About() {
+  const { userData } = useContext(UserContext);
 
-function About() {
- 
   return (
- <Jumbotron fluid className="About"> 
- <Container>      
+    <div className="page">
+      {userData.user ? (
+        <h1>Welcome {userData.user.userName}</h1>
+      ) : (
+        <>
+<article className="About card">       
   <p className="lead ml-3 p-1">
     This project was built to be used by Venezuelans in times of
     crisis. In the year 2019 Venezuela suffered a series of blackouts
@@ -30,11 +34,9 @@ function About() {
     electricity, collecting water before dams stop working, for
     example
   </p>
-  </Container>
-  </Jumbotron>
-      
-    );
-  }
-
-
-export default About;
+</article> 
+</>
+      )}
+    </div>
+  );
+}
