@@ -5,7 +5,7 @@ import Header from "./Front/components/layout/Header";
 import Home from "./Front/components/pages/Home";
 import Login from "./Front/components/auth/Login";
 import Register from "./Front/components/auth/Register";
-import UserContext from "./Front/context/userContext";
+import UserContext from "./Front/context/UserContext";
 
 import "./style.css";
 
