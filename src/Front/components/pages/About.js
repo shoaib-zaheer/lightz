@@ -1,13 +1,10 @@
-import React from 'react';
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Jumbotron, Container} from 'react-bootstrap'
 
-
-function About() {
- 
-  return (
- <Jumbotron fluid className="About"> 
- <Container>      
+export default function About() {
+return (
+  <div className="page">
+<article className="About card">       
   <p className="lead ml-3 p-1">
     This project was built to be used by Venezuelans in times of
     crisis. In the year 2019 Venezuela suffered a series of blackouts
@@ -30,11 +27,7 @@ function About() {
     electricity, collecting water before dams stop working, for
     example
   </p>
-  </Container>
-  </Jumbotron>
-      
-    );
-  }
-
-
-export default About;
+</article> 
+</div>
+);
+}
