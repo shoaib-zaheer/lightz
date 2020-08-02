@@ -9,7 +9,7 @@ const AuthRoute = require('./src/Back/routes/auth')
 
 
 
-mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect(process.env.MongoDB_URI || 'mongodb://localhost:27017/testdb', { useNewUrlParser: true , useUnifiedTopology: true });
 mongoose.set('useFindAndModify', true);
 mongoose.set('useCreateIndex', true);
 
