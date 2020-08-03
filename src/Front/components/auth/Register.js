@@ -18,7 +18,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, userName };
+      const newUser = {userName, email, password, passwordCheck};
       await Axios.post("http://localhost:8080/api/register", newUser);
       const loginRes = await Axios.post("http://localhost:8080/api/login", {
         email,
@@ -29,7 +29,7 @@ export default function Register() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      history.push("/my-page");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
@@ -60,11 +60,13 @@ export default function Register() {
         <input
           id="register-password"
           type="password"
+          autoComplete="false"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
           placeholder="Verify password"
+    
           onChange={(e) => setPasswordCheck(e.target.value)}
         />
 

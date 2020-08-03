@@ -25,7 +25,7 @@ export default function Login() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/");
+      history.push("/my-page");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
@@ -46,6 +46,7 @@ export default function Login() {
 
         <label htmlFor="login-password">Password</label>
         <input
+         autoComplete="false"
           id="login-password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}

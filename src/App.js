@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {Nav, Navbar} from 'react-bootstrap';
 import Axios from "axios";
 import Header from "./Front/components/layout/Header";
 import Home from "./Front/components/pages/Home";
 import Login from "./Front/components/auth/Login";
 import Register from "./Front/components/auth/Register";
 import UserContext from "./Front/context/UserContext";
-
+import GitHubIcon from '@material-ui/icons/GitHub';
 import "./style.css";
+import MyPage from "./Front/components/pages/MyPage";
+import About from "./Front/components/pages/About";
+import Tips from "./Front/components/pages/Tips";
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -46,13 +50,20 @@ export default function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
-          <div className="container">
+          
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/my-page" component={MyPage} />
+              <Route path="/about" component={About} />
+              <Route path="/tips" component={Tips} />
             </Switch>
-          </div>
+          <Navbar id="responsive-navbar-nav" className="justify-content-center text-center fixed-bottom"  color="dark" expand="lg" bg="dark" variant="dark">
+        {/* <nav className="text-muted">Non profit app </nav> */}
+        <Nav.Link className="text-white" href="https://github.com/KLisabeth/-Do-you-have-electricity-"><GitHubIcon/>  GitHub</Nav.Link>
+          @Copyright by LightZ
+          </Navbar>
         </UserContext.Provider>
       </BrowserRouter>
     </>

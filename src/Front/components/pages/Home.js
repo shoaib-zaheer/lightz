@@ -1,20 +1,21 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import UserContext from "../../context/UserContext";
+import React from "react";
+import HaveElectricity from "./HaveEl";
+import NoElectricity from "./NoEl";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container, Row, Col} from 'react-bootstrap'
+
 
 export default function Home() {
-  const { userData } = useContext(UserContext);
+ 
 
   return (
-    <div className="page">
-      {userData.user ? (
-        <h1>Welcome {userData.user.userName}</h1>
-      ) : (
-        <>
-          <h2>You are not logged in</h2>
-          <Link to="/login">Log in</Link>
-        </>
-      )}
-    </div>
+    
+    <Container>
+    <Row xs={1} md={2}>
+    <Col><HaveElectricity/></Col>
+    <Col><NoElectricity/></Col>
+   </Row>
+   </Container>
+   
   );
 }

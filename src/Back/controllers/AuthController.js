@@ -1,10 +1,11 @@
 const User = require("../models/User");
+const Report = require ("../models/Report")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const register1 = async (req, res) => {
   try {
-  let { email, password, passwordCheck, userName } = req.body;
+  let {userName, email, password, passwordCheck} = req.body;
 
   //validation
 
@@ -35,7 +36,7 @@ const register1 = async (req, res) => {
     userName
   });
   const savedUser = await newUser.save();
-  res.json(savedUser);
+  res.json(savedUser, { msg: "User added successfuly" });
 
 }
 catch(err) {
@@ -111,11 +112,88 @@ const getUser = async (req, res) => {
   });
 }
 
+const report1 = async (req, res) => {
+  try {
+    const {answer, city, state} = req.body;
+    const date_time = new Date();
+    const formattedDate = `${date_time.toDateString()} ${date_time.toLocaleTimeString()}`
+    const stringDate = formattedDate.toString()
+    
+  //validation
+ 
+  if (answer === undefined){
+    return res.status(400).json({msg: 'Please specify if you have electricity'});
+  }
+ 
+  if (city === undefined) {
+      return res.status(400).json({msg: 'Please specify your city'});
+    } 
+  // const existingCity = await Report.findOne({cityName: city})
+  //   if (existingCity) {
+  //     return res.status(400).json({ msg: "This city was already reported" });
+  //   }  
+  const newReport = new Report({
+      User,
+      answer,
+      cityName: city,
+      stateName: state,
+      date:stringDate,
+    });
+    const savedReport = await newReport.save();
+    res.json(savedReport);
+
+}
+catch(err) {
+  res.status(500).json({error: err.message});
+}
+}
+// const getAllReports = async (req, res, next) => {
+//   try {
+//     const reports = await Report.find(req.reports1);
+//     res.send(reports);
+//     } catch (error) {
+//     res.json({
+//       message: error.message,
+//     });
+//   }
+// };
+
+const getReportYes = async (req, res, next) => {
+  try {
+    const reports = await Report.find(req.reports1);
+    const count = reports.filter(i => i.answer === true);
+    res.send(count);
+    } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+
+
+const getReportNo = async (req, res) => {
+  try {
+    const reports = await Report.find(req.reports1);
+    const count = reports.filter(i => i.answer === false);
+    res.send(count);
+    } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
+  report1,
   login1,
   register1,
   tokenIsValid,
-  getUser
+  getUser,
+  //getAllReports,
+  getReportYes,
+  getReportNo,
+  
 };
 
 
