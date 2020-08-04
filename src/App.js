@@ -12,6 +12,7 @@ import "./style.css";
 import MyPage from "./Front/components/pages/MyPage";
 import About from "./Front/components/pages/About";
 import Tips from "./Front/components/pages/Tips";
+import Chart from "./Front/components/pages/Chart"
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -50,19 +51,32 @@ export default function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
-          
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/my-page" component={MyPage} />
-              <Route path="/about" component={About} />
-              <Route path="/tips" component={Tips} />
-            </Switch>
-          <Navbar id="responsive-navbar-nav" className="justify-content-center text-center fixed-bottom"  color="dark" expand="lg" bg="dark" variant="dark">
-        {/* <nav className="text-muted">Non profit app </nav> */}
-        <Nav.Link className="text-white" href="https://github.com/KLisabeth/-Do-you-have-electricity-"><GitHubIcon/>  GitHub</Nav.Link>
-          @Copyright by LightZ
+
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/my-page" component={MyPage} />
+            <Route path="/about" component={About} />
+            <Route path="/tips" component={Tips} />
+            <Route path="/chart" component={Chart} />
+          </Switch>
+          <Navbar
+            id="responsive-navbar-nav"
+            className="justify-content-center text-center fixed-bottom"
+            color="dark"
+            expand="lg"
+            bg="dark"
+            variant="dark"
+          >
+            {/* <nav className="text-muted">Non profit app </nav> */}
+            <Nav.Link
+              className="text-white"
+              href="https://github.com/KLisabeth/-Do-you-have-electricity-"
+            >
+              <GitHubIcon /> GitHub
+            </Nav.Link>
+            @Copyright by LightZ
           </Navbar>
         </UserContext.Provider>
       </BrowserRouter>

@@ -10,7 +10,7 @@ router.post("/login", AuthController.login1);
 router.post("/tokenIsValid", AuthController.tokenIsValid)
 router.get("/my-page", auth, AuthController.getUser)
 router.post("/report", AuthController.report1)
-//router.get("/reports", AuthController.getAllReports);
+router.get("/reports", AuthController.getAllReports);
 router.get("/yes", AuthController.getReportYes);
 router.get("/no", AuthController.getReportNo);
 

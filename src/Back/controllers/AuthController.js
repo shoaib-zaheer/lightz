@@ -147,20 +147,20 @@ catch(err) {
   res.status(500).json({error: err.message});
 }
 }
-// const getAllReports = async (req, res, next) => {
-//   try {
-//     const reports = await Report.find(req.reports1);
-//     res.send(reports);
-//     } catch (error) {
-//     res.json({
-//       message: error.message,
-//     });
-//   }
-// };
+ const getAllReports = async (req, res, next) => {
+   try {
+     const reports = await Report.find(req.report1);
+     res.send(reports);
+     } catch (error) {
+     res.json({
+       message: error.message,
+     });
+  }
+ };
 
 const getReportYes = async (req, res, next) => {
   try {
-    const reports = await Report.find(req.reports1);
+    const reports = await Report.find(req.report1);
     const count = reports.filter(i => i.answer === true);
     res.send(count);
     } catch (error) {
@@ -172,9 +172,9 @@ const getReportYes = async (req, res, next) => {
 
 
 
-const getReportNo = async (req, res) => {
+const getReportNo = async (req, res, next) => {
   try {
-    const reports = await Report.find(req.reports1);
+    const reports = await Report.find(req.report1);
     const count = reports.filter(i => i.answer === false);
     res.send(count);
     } catch (error) {
@@ -190,7 +190,7 @@ module.exports = {
   register1,
   tokenIsValid,
   getUser,
-  //getAllReports,
+  getAllReports,
   getReportYes,
   getReportNo,
   
