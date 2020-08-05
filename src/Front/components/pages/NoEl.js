@@ -15,11 +15,9 @@ export default function NoElectricity () {
 
   
    useEffect(() => {
-    Axios
-     .get("http://localhost:8080/api/no")
-     .then((res) => {
+    Axios.get(`${process.env.REACT_APP_BACKEND_URL}api/no`).then((res) => {
       JSON.stringify(setReports(res.data));
-    })
+    });
     
   }, [])
  

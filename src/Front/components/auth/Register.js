@@ -19,11 +19,17 @@ export default function Register() {
 
     try {
       const newUser = {userName, email, password, passwordCheck};
-      await Axios.post("http://localhost:8080/api/register", newUser);
-      const loginRes = await Axios.post("http://localhost:8080/api/login", {
-        email,
-        password,
-      });
+      await Axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}api/register`,
+        newUser
+      );
+      const loginRes = await Axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}api/login`,
+        {
+          email,
+          password,
+        }
+      );
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,

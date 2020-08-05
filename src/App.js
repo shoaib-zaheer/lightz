@@ -27,14 +27,17 @@ export default function App() {
         token = "";
       }
       const tokenRes = await Axios.post(
-        "http://localhost:8080/api/tokenIsValid",
+        `${process.env.REACT_APP_BACKEND_URL}api/tokenIsValid`,
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:8080/api/", {
-          headers: { "x-auth-token": token },
-        });
+        const userRes = await Axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}api/`,
+          {
+            headers: { "x-auth-token": token },
+          }
+        );
         setUserData({
           token,
           user: userRes.data,

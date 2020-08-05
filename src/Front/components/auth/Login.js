@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
-        "http://localhost:8080/api/login",
+        `${process.env.REACT_APP_BACKEND_URL}api/login`,
         loginUser
       );
       setUserData({
