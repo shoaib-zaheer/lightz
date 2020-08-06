@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import {Nav, Navbar} from 'react-bootstrap';
 import Axios from "axios";
-import Header from "./Front/components/layout/Header";
-import Home from "./Front/components/pages/Home";
-import Login from "./Front/components/auth/Login";
-import Register from "./Front/components/auth/Register";
-import UserContext from "./Front/context/UserContext";
+import Header from "./components/layout/Header";
+import Home from "./components/pages/Home";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserContext from "./context/UserContext";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import "./style.css";
-import MyPage from "./Front/components/pages/MyPage";
-import About from "./Front/components/pages/About";
-import Tips from "./Front/components/pages/Tips";
+import MyPage from "./components/pages/MyPage";
+import About from "./components/pages/About";
+import Tips from "./components/pages/Tips";
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -27,13 +27,13 @@ export default function App() {
         token = "";
       }
       const tokenRes = await Axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}api/tokenIsValid`,
+        "/api/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
         const userRes = await Axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}api/`,
+          "/api/",
           {
             headers: { "x-auth-token": token },
           }

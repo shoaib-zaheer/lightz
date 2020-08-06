@@ -1,9 +1,9 @@
 import React from "react";
-import '../../../App';
+import '../../App';
 //import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import l from './l.png';
-import z from './z.png';
+import l from "../layout/l.png";
+import z from '../layout/z.png';
 import AuthOptions from '../auth/AuthOptions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Media, NavItem, Navbar } from 'react-bootstrap';

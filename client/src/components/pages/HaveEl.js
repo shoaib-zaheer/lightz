@@ -16,7 +16,7 @@ export default function HaveElectricity () {
    
   
    useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BACKEND_URL}api/yes`).then((res) => {
+    Axios.get("/api/yes").then((res) => {
       setReports(res.data);
     });
       

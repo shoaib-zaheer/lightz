@@ -4,9 +4,11 @@ import UserContext from "../../context/UserContext";
 import Axios from "axios";
 import ErrorNotice from "../misc/ErrorNotice";
 
-export default function Login() {
+export default function Register() {
+  const [userName, setUserName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [passwordCheck, setPasswordCheck] = useState();
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
@@ -14,11 +16,19 @@ export default function Login() {
 
   const submit = async (e) => {
     e.preventDefault();
+
     try {
-      const loginUser = { email, password };
+      const newUser = {userName, email, password, passwordCheck};
+      await Axios.post(
+        "/api/register",
+        newUser
+      );
       const loginRes = await Axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}api/login`,
-        loginUser
+        "/api/login",
+        {
+          email,
+          password,
+        }
       );
       setUserData({
         token: loginRes.data.token,
@@ -30,29 +40,43 @@ export default function Login() {
       err.response.data.msg && setError(err.response.data.msg);
     }
   };
+
   return (
     <div className="page">
-      <h2>Log in</h2>
+      <h2>Register</h2>
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
       <form className="form" onSubmit={submit}>
-        <label htmlFor="login-email">Email</label>
+        <label htmlFor="register-user-name">User name</label>
         <input
-          id="login-email"
+          id="register-user-name"
+          type="text"
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        
+        <label htmlFor="register-email">Email</label>
+        <input
+          id="register-email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label htmlFor="login-password">Password</label>
+        <label htmlFor="register-password">Password</label>
         <input
-         autoComplete="false"
-          id="login-password"
+          id="register-password"
           type="password"
+          autoComplete="false"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input
+          type="password"
+          placeholder="Verify password"
+    
+          onChange={(e) => setPasswordCheck(e.target.value)}
+        />
 
-        <input type="submit" value="Log in" />
+        <input type="submit" value="Register" />
       </form>
     </div>
   );

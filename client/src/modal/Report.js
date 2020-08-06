@@ -34,7 +34,7 @@ export default function Report() {
     try {
       const report = {answer, city, state};
       const reportRes = await Axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}api/report`,
+        "/api/report",
         report
       );
      

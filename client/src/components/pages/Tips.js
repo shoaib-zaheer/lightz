@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Media, ListGroup } from 'react-bootstrap'
-import question from './question.png';
+import question from '../pages/question.png';
 
 function Tips() {
   return (
