@@ -35,7 +35,7 @@ export default function Register() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/my-page");
+      history.push("/api/my-page");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
