@@ -39,7 +39,7 @@ export default function Report() {
       );
      
       localStorage.setItem("auth-token", JSON.stringify(reportRes.data));
-      history.push("/api");
+      history.push("/");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }

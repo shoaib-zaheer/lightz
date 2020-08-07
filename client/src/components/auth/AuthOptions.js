@@ -10,8 +10,8 @@ export default function AuthOptions() {
 
   const history = useHistory();
 
-  const register = () => history.push("/api/register");
-  const login = () => history.push("/api/login");
+  const register = () => history.push("/register");
+  const login = () => history.push("/login");
   const logout = () => {
     setUserData({
       token: undefined,

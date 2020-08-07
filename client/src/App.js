@@ -33,7 +33,7 @@ export default function App() {
       );
       if (tokenRes.data) {
         const userRes = await Axios.get(
-          "/api",
+          "/api/",
           {
             headers: { "x-auth-token": token },
           }
