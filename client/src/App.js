@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import {Nav, Navbar} from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import Axios from "axios";
 import Header from "./components/layout/Header";
 import Home from "./components/pages/Home";
@@ -10,8 +10,12 @@ import UserContext from "./context/UserContext";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import "./style.css";
 import MyPage from "./components/pages/MyPage";
+import Contact from "./components/layout/Contact";
 import About from "./components/pages/About";
 import Tips from "./components/pages/Tips";
+import ForgotPassword from "./components/password/ForgotPassword";
+import NewPassword from "./components/password/NewPassword";
+import Message from './components/messages/EmailSent'
 
 export default function App() {
   const [userData, setUserData] = useState({
@@ -32,12 +36,9 @@ export default function App() {
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get(
-          "/api/",
-          {
-            headers: { "x-auth-token": token },
-          }
-        );
+        const userRes = await Axios.get("/api/", {
+          headers: { "x-auth-token": token },
+        });
         setUserData({
           token,
           user: userRes.data,
@@ -53,18 +54,22 @@ export default function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
-          
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/my-page" component={MyPage} />
-              <Route path="/about" component={About} />
-              <Route path="/tips" component={Tips} />
-            </Switch>
-          <Navbar id="responsive-navbar-nav" className="justify-content-center text-center fixed-bottom"  color="dark" expand="lg" bg="dark" variant="dark">
-        {/* <nav className="text-muted">Non profit app </nav> */}
-        <Nav.Link className="text-white" href="https://github.com/KLisabeth/-Do-you-have-electricity-"><GitHubIcon/>  GitHub</Nav.Link>
+
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/my-page" component={MyPage} />
+            <Route path="/about" component={About} />
+            <Route path="/tips" component={Tips} />
+            <Route path="/message" component={Message} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/reset-password/:token" component={NewPassword} />
+          </Switch>
+          <Navbar id="responsive-navbar-nav" className="justify-content-center text-center fixed-bottom text-white" color="dark" expand="lg" bg="dark" variant="dark">
+            {/* <nav className="text-muted">Non profit app </nav> */}
+            <Nav.Link className="text-white" href="https://github.com/NickMarinade/lightz"><GitHubIcon />  GitHub</Nav.Link>
           @Copyright by LightZ
           </Navbar>
         </UserContext.Provider>

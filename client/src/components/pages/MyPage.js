@@ -11,17 +11,18 @@ export default function MyPage() {
     <div className="page">
       {userData.user ? (
         <div className="justify-content-center">
-        <h2> Welcome {userData.user.userName}</h2>
-        <Report/>
+          <h2> Welcome {userData.user.userName}</h2>
+          <Report />
         </div>
-        
+
       ) : (
-        <>
-        <h2>You are not logged in</h2>
-        <Link to="/login">Log in</Link>
-        </>
-      )
-}
+          <div className="justify-content-center">
+            <h2>You are not logged in</h2>
+            <Link to="/login">Log in</Link>
+            <p className="m-4 p-2"></p>
+          </div>
+        )
+      }
 
     </div>
   );

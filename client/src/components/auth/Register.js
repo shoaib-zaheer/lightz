@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import UserContext from "../../context/UserContext";
 import Axios from "axios";
 import ErrorNotice from "../misc/ErrorNotice";
@@ -18,18 +19,12 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = {userName, email, password, passwordCheck};
-      await Axios.post(
-        "/api/register",
-        newUser
-      );
-      const loginRes = await Axios.post(
-        "/api/login",
-        {
-          email,
-          password,
-        }
-      );
+      const newUser = { userName, email, password, passwordCheck };
+      await Axios.post("/api/register", newUser);
+      const loginRes = await Axios.post("/api/login", {
+        email,
+        password,
+      });
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
@@ -54,7 +49,7 @@ export default function Register() {
           type="text"
           onChange={(e) => setUserName(e.target.value)}
         />
-        
+
         <label htmlFor="register-email">Email</label>
         <input
           id="register-email"
@@ -72,11 +67,16 @@ export default function Register() {
         <input
           type="password"
           placeholder="Verify password"
-    
+          autoComplete="false"
           onChange={(e) => setPasswordCheck(e.target.value)}
         />
 
-        <input type="submit" value="Register" />
+        <Button className="log btn btn-primary" type="submit" value="Register">
+          Register
+        </Button>
+        <Link to="/" className="btn btn-link">
+          Cancel
+        </Link>
       </form>
     </div>
   );
