@@ -16,7 +16,6 @@ export default function Report() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [email, setEmail] = useState();
   const [answer, setAnswer] = useState();
   const [city, setCity] = useState();
   const [state, setState] = useState();
@@ -32,7 +31,7 @@ export default function Report() {
   const submit = async () => {
 
     try {
-      const report = { email, answer, city, state };
+      const report = { answer, city, state };
       const reportRes = await Axios.post(
         "/api/report",
         report
