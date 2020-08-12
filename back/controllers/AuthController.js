@@ -1,10 +1,11 @@
 const User = require("../models/User");
-const Report = require ("../models/Report")
+const Report = require("../models/Report");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mailgun = require("mailgun-js");
 const DOMAIN = process.env.MAILGUN_DOMAIN;
 const mg = mailgun({ apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN });
+
 const _ = require("lodash");
 
 const register1 = async (req, res) => {
@@ -14,39 +15,39 @@ const register1 = async (req, res) => {
     //validation
 
     if (!email || !password || !passwordCheck) {
-      return res.status(400).json({ msg: "Required field are empty" });
-    } else if (password.length < 5) {
-      return res
-        .status(400)
-        .json({ msg: "Password must have at least 6 characters" });
-    } else if (password !== passwordCheck) {
-      return res
-        .status(400)
-        .json({ msg: "Wrong password, enter the same password twice" });
-    } else if (!userName) {
+      return res.status(400).json({ msg: 'Required fields are empty' });
+    }
+    else if (password.length < 5) {
+      return res.status(400).json({ msg: "Password must have at least 6 characters" });
+    }
+    else if (password !== passwordCheck) {
+      return res.status(400).json({ msg: "Wrong password, enter the same password twice" });
+    }
+    else if (!userName) {
       userName = email;
     }
 
-    const existingUser = await User.findOne({ email: email });
+    const existingUser = await User.findOne({ email: email })
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ msg: "An account with this email already exist" });
+      return res.status(400).json({ msg: "An account with this email already exist" });
     }
 
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, salt);
+    const salt = await bcrypt.genSalt()
+    const passwordHash = await bcrypt.hash(password, salt)
 
     const newUser = new User({
       email,
       password: passwordHash,
-      userName,
+      userName
     });
     const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
-  } catch (err) {
+    res.json(savedUser);
+
+  }
+  catch (err) {
     res.status(500).json({ error: err.message });
   }
+
 };
 
 const login1 = async (req, res) => {
@@ -56,19 +57,17 @@ const login1 = async (req, res) => {
     //validation
 
     if (!email || !password) {
-      return res.status(400).json({ msg: "Required field are empty" });
+      return res.status(400).json({ msg: "Required fields are empty" });
     }
 
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ msg: "No account with this email has been found" });
+      return res.status(400).json({ msg: "No account with this email has been found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Wrong password" });
+      return res.status(400).json({ msg: "Invalid password" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
@@ -77,12 +76,14 @@ const login1 = async (req, res) => {
       user: {
         id: user._id,
         userName: user.userName,
-      },
-    });
-  } catch (err) {
+      }
+    })
+  }
+  catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+
+}
 
 const tokenIsValid = async (req, res) => {
   try {
@@ -102,10 +103,11 @@ const tokenIsValid = async (req, res) => {
     } else {
       return res.json(true);
     }
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 
 const getUser = async (req, res) => {
   const user = await User.findById(req.user);
@@ -113,29 +115,32 @@ const getUser = async (req, res) => {
     userName: user.userName,
     id: user._id,
   });
-};
+}
 
 const report1 = async (req, res) => {
   try {
-    const { answer, city, state } = req.body;
+    const { email, answer, city, state } = req.body;
     const date_time = new Date();
-    const formattedDate = `${date_time.toDateString()} ${date_time.toLocaleTimeString()}`;
-    const stringDate = formattedDate.toString();
+    const formattedDate = `${date_time.toDateString()} ${date_time.toLocaleTimeString()}`
+    const stringDate = formattedDate.toString()
+
 
     //validation
+    if (!email || email === undefined) {
+      return res.status(400).json({ msg: 'Please include your email' });
+    }
 
     if (answer === undefined) {
-      return res
-        .status(400)
-        .json({ msg: "Please specify if you have electricity" });
+      return res.status(400).json({ msg: 'Please specify if you have electricity' });
     }
 
     if (city === undefined) {
-      return res.status(400).json({ msg: "Please specify your city" });
+      return res.status(400).json({ msg: 'Please specify your city' });
     }
 
+
     const newReport = new Report({
-      User,
+      email: email,
       answer,
       cityName: city,
       stateName: state,
@@ -143,60 +148,199 @@ const report1 = async (req, res) => {
     });
     const savedReport = await newReport.save();
     res.json(savedReport);
-  } catch (err) {
+
+  }
+  catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
-
-const getReportYes = async (req, res, next) => {
+}
+const getReportYes = async (req, res) => {
   try {
-    const reports = await Report.find(req.reports1)
-      .sort({ createdAt: -1 })
-      .limit(30);
-    const yes = reports.filter((i) => i.answer === true);
-    const userEmail = [];
-    const reportsFiltered = [];
-    yes.forEach((register1) => {
-      const username = register1.email;
-      if (userEmail.includes(username)) {
-        return;
-      } else {
-        userEmail.push(username);
-        reportsFiltered.push(register1);
-      }
-    });
-    res.send(reportsFiltered);
+    const count = await Report.find().sort({ createdAt: -1 }).limit(50);
+    const yes = count.filter(i => i.answer === true);
+    const filteredReports = filterReports(yes);
+    res.json(filteredReports);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
-};
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
+}
+
 
 const getReportNo = async (req, res) => {
   try {
-    const reports = await Report.find(req.reports1)
-      .sort({ createdAt: -1 })
-      .limit(26);
-    const no = reports.filter((i) => i.answer === false);
-    const userEmail = [];
-    const reportsFiltered = [];
-    no.forEach((register1) => {
-      const username = register1.email;
-      if (userEmail.includes(username)) {
-        return;
-      } else {
-        userEmail.push(username);
-        reportsFiltered.push(register1);
-      }
-    });
-    res.send(no);
+    const count = await Report.find().sort({ createdAt: -1 }).limit(50);
+    const no = count.filter(i => i.answer === false);
+    const filteredReports = filterReports(no);
+    res.json(filteredReports);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
+}
+
+const getReports24hYes = async (req, res) => {
+  try {
+
+    const count = await Report.find({
+      createdAt: { $gt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+    })
+      .sort({ createdAt: -1 })
+      .limit(50);
+    const yes = count.filter(i => i.answer === true);
+    const filteredReports = filterReports(yes);
+    res.json(filteredReports);
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
+}
+
+const getReports24hNo = async (req, res) => {
+  try {
+
+    const count = await Report.find({
+      createdAt: { $gt: new Date(Date.now() - 24 * 60 * 60 * 1000) },
+    })
+      .sort({ createdAt: -1 })
+      .limit(50);
+    const no = count.filter(i => i.answer === false);
+    const filteredReports = filterReports(no);
+    res.json(filteredReports);
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
 };
+
+const getReport3dayYes = async (req, res) => {
+  try {
+
+    const count = await Report.find({
+      createdAt: { $gt: new Date(Date.now() - 72 * 60 * 60 * 1000) },
+    })
+      .sort({ createdAt: -1 })
+      .limit(50);
+    const yes = count.filter(i => i.answer === true);
+    const filteredReports = filterReports(yes);
+    res.json(filteredReports);
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
+}
+const getReport3dayNo = async (req, res) => {
+  try {
+
+    const count = await Report.find({
+      createdAt: { $gt: new Date(Date.now() - 72 * 60 * 60 * 1000) },
+    })
+      .sort({ createdAt: -1 })
+      .limit(50);
+    const no = count.filter(i => i.answer === false);
+    const filteredReports = filterReports(no);
+    res.json(filteredReports);
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+
+  function filterReports(uniqueReports) {
+    const emails = [];
+    const reportsFiltered = [];
+    uniqueReports.forEach((report1) => {
+      const email = report1.email;
+      if (emails.includes(email)) {
+        return;
+      } else {
+        emails.push(email);
+        reportsFiltered.push(report1);
+      }
+    });
+    return reportsFiltered;
+  }
+}
 
 const forgotPassword = (req, res) => {
   const { email } = req.body;
@@ -312,12 +456,13 @@ module.exports = {
   register1,
   tokenIsValid,
   getUser,
-  getMessage,
-  forgotPassword,
-  resetPassword,
   getReportYes,
   getReportNo,
-  
+  forgotPassword,
+  resetPassword,
+  getMessage,
+  getReports24hYes,
+  getReports24hNo,
+  getReport3dayYes,
+  getReport3dayNo,
 };
-
-

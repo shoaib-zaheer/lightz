@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button } from 'react-bootstrap'
 import UserContext from "../../context/UserContext";
 import Axios from "axios";
 import ErrorNotice from "../misc/ErrorNotice";
+
 
 export default function Register() {
   const [userName, setUserName] = useState();
@@ -39,8 +40,7 @@ export default function Register() {
   return (
     <div className="page">
       <h2>Register</h2>
-      {error && (
-        <ErrorNotice message={error} clearError={() => setError(undefined)} />
+      {error && (<ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
       <form className="form" onSubmit={submit}>
         <label htmlFor="register-user-name">User name</label>
@@ -71,12 +71,8 @@ export default function Register() {
           onChange={(e) => setPasswordCheck(e.target.value)}
         />
 
-        <Button className="log btn btn-primary" type="submit" value="Register">
-          Register
-        </Button>
-        <Link to="/" className="btn btn-link">
-          Cancel
-        </Link>
+        <Button className="log btn btn-1 btn-warning" type="submit" value="Register">Register</Button>
+        <Link to="/" className="btn btn-link">Cancel</Link>
       </form>
     </div>
   );

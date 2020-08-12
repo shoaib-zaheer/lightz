@@ -1,10 +1,10 @@
-import React,{useState} from 'react';
-import {useForm} from 'react-hook-form';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import ErrorNotice from "../components/misc/ErrorNotice";
-import {Button, Modal} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 
 
@@ -16,7 +16,7 @@ export default function Report() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [email, setEmail] = useState();
   const [answer, setAnswer] = useState();
   const [city, setCity] = useState();
   const [state, setState] = useState();
@@ -32,7 +32,7 @@ export default function Report() {
   const submit = async () => {
 
     try {
-      const report = { answer, city, state };
+      const report = { email, answer, city, state };
       const reportRes = await Axios.post(
         "/api/report",
         report
@@ -47,29 +47,30 @@ export default function Report() {
 
 
   return (
-    <div className="text-center">
-      <Button variant="primary" onClick={handleShow}>
+    <div className="text-center" >
+      <Button className="btn-1 btn-warning" onClick={handleShow}>
         Make your report
         </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title className="ml-5 text-warning">Do you have Electricity?</Modal.Title>
+      <Modal className="" show={show} onHide={handleClose}>
+        <Modal.Header closeButton className="mod">
+          <Modal.Title className="ml-5 mod text-warning">Do you have Electricity?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="mod">
 
-          <form onSubmit={handleSubmit(submit)}>
-            <div className="">
-              <label className="text-success mr-1">YES</label>
-              <input className="mr-4" name="name" type="radio" value={true} ref={register} onChange={(event) => setAnswer(event.target.value)} />
+          <form className="mod" onSubmit={handleSubmit(submit)}>
+            <div className="mod">
+              <label className="text-warning mr-1">Yes</label>
+              <input className="mr-4 " name="radio" type="radio" value={true} ref={register} onChange={(event) => setAnswer(event.target.value)} />
               <label className="text-danger mr-1">No</label>
-              <input name="name" type="radio" value={false} ref={register} onChange={(event) => setAnswer(event.target.value)} />
+              <input name="radio" type="radio" value={false} ref={register} onChange={(event) => setAnswer(event.target.value)} />
               <br />
               <hr />
             </div>
-            <input className="form-control" type="text" name="city" placeholder="City" ref={register} onChange={(event) => setCity(event.target.value)} />
+            <input className="form-control mod" type="text" name="email" placeholder="Email" ref={register} onChange={(event) => setEmail(event.target.value)} />
+            <input className="form-control mod" type="text" name="city" placeholder="City" ref={register} onChange={(event) => setCity(event.target.value)} />
             <br />
-            <select className="custom-select" name="state" ref={register} onChange={(event) => setState(event.target.value)}>
+            <select className="custom-select mod" name="state" ref={register} onChange={(event) => setState(event.target.value)}>
               <option >Select your State</option>
               <option value="Amazonas">Amazonas</option>
               <option value="Anzoátegui">Anzoátegui</option>
@@ -99,14 +100,14 @@ export default function Report() {
             </select>
             <br />
             <hr />
-            <button className="btn btn-danger" onClick={handleClose}>Cancel</button>
-            <button className="btn btn-primary" type="submit" onSubmit={submit}>Report</button>
+            <button className="btn bor btn-danger" onClick={handleClose}>Cancel</button>
+            <button className="btn btn-1 btn-warning" type="submit" onSubmit={submit}>Report</button>
 
           </form>
 
 
         </Modal.Body>
-        <Modal.Footer className="justify-content-center">
+        <Modal.Footer className="justify-content-center mod">
           {error && (<ErrorNotice message={error} clearError={() => setError(undefined)} />)}
         </Modal.Footer>
 

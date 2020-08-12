@@ -2,29 +2,27 @@ import React, {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';  
 import ErrorNotice from "../misc/ErrorNotice";
-import { Table } from "react-bootstrap";
+import {Table} from "react-bootstrap";
 
 
 
 
 
-export default function HaveElectricity () {  
+export default function Have24h () {  
    const [reports, setReports] = useState([]);
    const [error, setError] = useState();
-  
-   
+
   
    useEffect(() => {
-    Axios.get("/api/yes").then((res) => {
+    Axios
+     .get("/api/yes24")
+     .then((res) => {
       setReports(res.data);
-    });
-      
-
-   
+    })
     
   }, [])
  
-  
+ 
  
   const renderHeader = () => {
     let headerElement = ['#','time','state', 'city', ]
@@ -47,16 +45,14 @@ const renderBody = () => {
       )
   })
 }
-if(!reports) {
-  return <div className="elect">Loading...</div>;
-}
+ 
   
     return (
       
-        <div className="elect">  
+        <div>  
           <div>
             <h1 id='title'>Have electricity</h1>
-            <Table responsive className="elect">
+            <Table responsive>
                 <thead className="thead-dark">
                     <tr>{renderHeader()}</tr>
                 </thead>
@@ -69,5 +65,3 @@ if(!reports) {
         </div>  
     )  
 }  
-
-

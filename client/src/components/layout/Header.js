@@ -1,5 +1,6 @@
 import React from "react";
 import '../../App';
+//import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import l from './l.png';
 import z from './z.png';
@@ -9,7 +10,7 @@ import { Nav, Media, NavItem, Navbar } from 'react-bootstrap';
 
 export default function Header() {
   return (
-    <Navbar id="header" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar id="header" collapseOnSelect expand="lg" variant="dark">
       <Media>
         <img src={l} alt="logo" />
         <img src={z} alt="logo" />

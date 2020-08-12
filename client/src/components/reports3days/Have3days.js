@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';  
 import ErrorNotice from "../misc/ErrorNotice";
-import { Table } from "react-bootstrap";
+import {Table} from "react-bootstrap";
 
 
 
@@ -14,9 +14,11 @@ export default function NoElectricity () {
 
   
    useEffect(() => {
-    Axios.get("/api/no").then((res) => {
-      JSON.stringify(setReports(res.data));
-    });
+    Axios
+     .get("/api/yes3days")
+     .then((res) => {
+      setReports(res.data);
+    })
     
   }, [])
  
@@ -49,7 +51,7 @@ const renderBody = () => {
       
         <div>  
           <div>
-            <h1 id='title'>Don't have electricity</h1>
+            <h1 id='title'>Have electricity</h1>
             <Table responsive>
                 <thead className="thead-dark">
                     <tr>{renderHeader()}</tr>
