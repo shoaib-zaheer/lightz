@@ -27,8 +27,8 @@ export default function Home() {
           <h2>Reports</h2>
           <select className="custom-select mod" name="state" onChange={event => handleChange(event.target.value)}>
             <option>All reports</option>
-            <option value="last24hours">All reports for last 24 hours</option>
-            <option value="last3days">All reports for last 3 days</option>
+            <option value="last24hours">Reports for last 24 hours</option>
+            <option value="last3days">Reports for last 3 days</option>
           </select>
           <h2>Welcome {userData.user.userName}</h2>
           <Report />
@@ -45,8 +45,8 @@ export default function Home() {
             <h2>Reports</h2>
             <select className="custom-select mod" name="state" onChange={event => handleChange(event.target.value)}>
               <option >All reports</option>
-              <option value="last24hours">All reports for last 24 hours</option>
-              <option value="last3days">All reports for last 3 days</option>
+              <option value="last24hours">Reports for last 24 hours</option>
+              <option value="last3days">Reports for last 3 days</option>
             </select>
             <h6 className="justify-content-center">Please <span><Link to="/login">Log in</Link></span>  or <span><Link to="/register">Register</Link></span> to make a report</h6>
             <Container>
