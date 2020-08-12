@@ -67,7 +67,7 @@ export default function Report() {
               <br />
               <hr />
             </div>
-            <input className="form-control mod" type="text" name="email" placeholder="Email" ref={register} onChange={(event) => setEmail(event.target.value)} />
+            
             <input className="form-control mod" type="text" name="city" placeholder="City" ref={register} onChange={(event) => setCity(event.target.value)} />
             <br />
             <select className="custom-select mod" name="state" ref={register} onChange={(event) => setState(event.target.value)}>

@@ -2,10 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const reportSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-  },
+  
   answer: {
     type: Boolean,
     required: true,

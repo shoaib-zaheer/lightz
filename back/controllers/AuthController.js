@@ -123,12 +123,10 @@ const report1 = async (req, res) => {
     const date_time = new Date();
     const formattedDate = `${date_time.toDateString()} ${date_time.toLocaleTimeString()}`
     const stringDate = formattedDate.toString()
-
+console.log(stringDate);
 
     //validation
-    if (!email || email === undefined) {
-      return res.status(400).json({ msg: 'Please include your email' });
-    }
+    
 
     if (answer === undefined) {
       return res.status(400).json({ msg: 'Please specify if you have electricity' });
@@ -140,7 +138,6 @@ const report1 = async (req, res) => {
 
 
     const newReport = new Report({
-      email: email,
       answer,
       cityName: city,
       stateName: state,
@@ -158,58 +155,58 @@ const getReportYes = async (req, res) => {
   try {
     const count = await Report.find().sort({ createdAt: -1 }).limit(50);
     const yes = count.filter(i => i.answer === true);
-    const filteredReports = filterReports(yes);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(yes);
+    res.json(yes);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
-}
+//   function filterReports(uniqueReports) {
+//     const emails = [];
+//     const reportsFiltered = [];
+//     uniqueReports.forEach((report1) => {
+//       const email = report1.email;
+//       if (emails.includes(email)) {
+//         return;
+//       } else {
+//         emails.push(email);
+//         reportsFiltered.push(report1);
+//       }
+//     });
+//     return reportsFiltered;
+//   }
+ }
 
 
 const getReportNo = async (req, res) => {
   try {
     const count = await Report.find().sort({ createdAt: -1 }).limit(50);
     const no = count.filter(i => i.answer === false);
-    const filteredReports = filterReports(no);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(no);
+    res.json(no);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
-}
+//   function filterReports(uniqueReports) {
+//     const emails = [];
+//     const reportsFiltered = [];
+//     uniqueReports.forEach((report1) => {
+//       const email = report1.email;
+//       if (emails.includes(email)) {
+//         return;
+//       } else {
+//         emails.push(email);
+//         reportsFiltered.push(report1);
+//       }
+//     });
+//     return reportsFiltered;
+//   }
+ }
 
 const getReports24hYes = async (req, res) => {
   try {
@@ -220,28 +217,28 @@ const getReports24hYes = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(50);
     const yes = count.filter(i => i.answer === true);
-    const filteredReports = filterReports(yes);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(yes);
+    res.json(yes);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
+//   function filterReports(uniqueReports) {
+//     const emails = [];
+//     const reportsFiltered = [];
+//     uniqueReports.forEach((report1) => {
+//       const email = report1.email;
+//       if (emails.includes(email)) {
+//         return;
+//       } else {
+//         emails.push(email);
+//         reportsFiltered.push(report1);
+//       }
+//     });
+//     return reportsFiltered;
+//   }
 }
 
 const getReports24hNo = async (req, res) => {
@@ -253,29 +250,29 @@ const getReports24hNo = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(50);
     const no = count.filter(i => i.answer === false);
-    const filteredReports = filterReports(no);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(no);
+    res.json(no);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
-};
+//   function filterReports(uniqueReports) {
+//     const emails = [];
+//     const reportsFiltered = [];
+//     uniqueReports.forEach((report1) => {
+//       const email = report1.email;
+//       if (emails.includes(email)) {
+//         return;
+//       } else {
+//         emails.push(email);
+//         reportsFiltered.push(report1);
+//       }
+//     });
+//     return reportsFiltered;
+//   }
+ };
 
 const getReport3dayYes = async (req, res) => {
   try {
@@ -286,28 +283,28 @@ const getReport3dayYes = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(50);
     const yes = count.filter(i => i.answer === true);
-    const filteredReports = filterReports(yes);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(yes);
+    res.json(yes);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
+  // function filterReports(uniqueReports) {
+  //   const emails = [];
+  //   const reportsFiltered = [];
+  //   uniqueReports.forEach((report1) => {
+  //     const email = report1.email;
+  //     if (emails.includes(email)) {
+  //       return;
+  //     } else {
+  //       emails.push(email);
+  //       reportsFiltered.push(report1);
+  //     }
+  //   });
+  //   return reportsFiltered;
+  // }
 }
 const getReport3dayNo = async (req, res) => {
   try {
@@ -318,28 +315,28 @@ const getReport3dayNo = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(50);
     const no = count.filter(i => i.answer === false);
-    const filteredReports = filterReports(no);
-    res.json(filteredReports);
+    // const filteredReports = filterReports(no);
+    res.json(no);
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
 
-  function filterReports(uniqueReports) {
-    const emails = [];
-    const reportsFiltered = [];
-    uniqueReports.forEach((report1) => {
-      const email = report1.email;
-      if (emails.includes(email)) {
-        return;
-      } else {
-        emails.push(email);
-        reportsFiltered.push(report1);
-      }
-    });
-    return reportsFiltered;
-  }
+  // function filterReports(uniqueReports) {
+  //   const emails = [];
+  //   const reportsFiltered = [];
+  //   uniqueReports.forEach((report1) => {
+  //     const email = report1.email;
+  //     if (emails.includes(email)) {
+  //       return;
+  //     } else {
+  //       emails.push(email);
+  //       reportsFiltered.push(report1);
+  //     }
+  //   });
+  //   return reportsFiltered;
+  // }
 }
 
 const forgotPassword = (req, res) => {
