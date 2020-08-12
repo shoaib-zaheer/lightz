@@ -44,11 +44,11 @@ export default function Reports24h() {
       
       ) : (
   <div>
-  <h2>All reports for last 24 hours</h2>
+  <h2>Reports for last 24 hours</h2>
   <select className=" custom-select mod" name="state" onChange={event => handleChange(event.target.value)}>
-        <option>All reports for last 24 hours</option>
-        <option value="">All reports for all the time</option>
-        <option value="last3days">All reports for last 3 days</option>
+        <option>Reports for last 24 hours</option>
+        <option value="">All reports</option>
+        <option value="last3days">Reports for last 3 days</option>
    </select>
   
   <h6 className="justify-content-center">Please <span><Link to="/login">Log in</Link></span>  or <span><Link to="/register">Register</Link></span> to make a report</h6>
