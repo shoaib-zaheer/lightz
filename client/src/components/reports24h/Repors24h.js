@@ -26,11 +26,11 @@ export default function Reports24h() {
     <div className="page">
     {userData.user ? (
     <div className="justify-content-center">
-    <h2>All reports for last 24 hours</h2>
+    <h2>Reports for last 24 hours</h2>
     <select className="custom-select mod" name="state" onChange={event => handleChange(event.target.value)}>
-        <option >All reports for last 24 hours</option>
-        <option value="">All reports for all the time</option>
-        <option value="last3days">All reports for last 3 days</option>
+        <option >Reports for last 24 hours</option>
+        <option value="">All reports</option>
+        <option value="last3days">Reports for last 3 days</option>
    </select>
     <h2>Welcome {userData.user.userName}</h2>
       <Report/>
