@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,8 +8,6 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EmailIcon from '@material-ui/icons/Email';
 import l from './l.png';
 import z from './z.png';
-import UserContext from "../../context/UserContext";
-import { useHistory } from "react-router-dom";
 
 
 
@@ -19,9 +17,6 @@ export default function Contact() {
   const [message, setMessage] = useState();
   // eslint-disable-next-line
   const [error, setError] = useState();
-
-  const { setUserData } = useContext(UserContext);
-  const history = useHistory();
 
 
 
@@ -34,7 +29,6 @@ export default function Contact() {
         "/api/message",
         msg
       );
-      history.push("/sent");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
