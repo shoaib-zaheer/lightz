@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: rgb(211, 172, 14);
+}
+.bg,
+.rep,
+.mod,
+#bg,
+#header{
+  background-color: black;
+}
+.About,
+body{
+  background-color: rgb(242, 197, 19);
+}
+button,
+input[type="submit"] {
+  border: none;
+  background: none;
+  color: unset;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h6,
+p
+{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+  color: black;
+}
+
+
+/* general */
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.page {
+  padding: 3rem;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* 
+.repButton{
+  padding: 0.3rem 0.5rem;
+  border: 3px solid #6aa051;
+  text-align: center;
+} */
+
+
+/* form */
+.msg-area,
+.form label,
+.form input {
+  display: block;
+  margin-left: 10%;
+}
+.msg-area,
+.form input {
+  margin-bottom: 1rem;
+}
+.form label {
+  margin-bottom: 0.2rem;
+  color: rgb(91, 90, 89);
+}
+.msg-area,
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
+  width: 80%;
+  padding: 0.3rem;
+  border: 1px solid #c2c2c2;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  font-size: 1.1rem;
+}
+.form input:focus {
+  border: 1px solid #50a4e9;
+  box-shadow: inset 0px 0px 5px rgba(38, 142, 228, 0.5);
+  outline: none;
+}
+.form input[type="submit"] {
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  
+}
+.log, .fp {
+  margin-left: 10%;
+  font-size: 1.1rem;
+  margin-bottom: 2em;
+}
+.btn-link{
+  font-size: 1.1rem;
+  margin-bottom: 2em;
+}
+
+.btn-1 {
+  border: 3px solid rgba(250, 211, 16, 0.886);
+  background-color: black;
+  color: rgb(211, 211, 34);
+}
+.contactL{
+  max-width: 80px; 
+  max-height: 28px;
+}
+.contactZ{
+  max-width: 4rem; 
+  max-height: 4rem;
+}
+
+td {
+color: black;
+background-color: rgb(238, 212, 108);
+}
+/* error notice */
+
+.error-notice {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid #f4e3e3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #df1111;
+}
+.error-notice button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #df4343;
+  color: #ffffff;
+}
+.mod,
+#link ,
+#label0,
+#label1{
+  color: rgb(211, 172, 14);
+}
+.bor{
+  border: 3px solid #f0f0f0;
+}
+th{
+  background-color: burlywood;
+}
+
+/* media queries */
+
+@media screen and (max-width: 550px) {
+  #header .title {
+    font-size: 1.2rem;
+  }
+  #header .auth-options button {
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+}
